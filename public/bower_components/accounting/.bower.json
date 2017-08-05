@@ -1,0 +1,31 @@
+{
+  "author": "Open Exchange Rates <info@openexchangerates.org> (https://www.openexchangerates.org)",
+  "description": "number, money and currency formatting library",
+  "homepage": "http://openexchangerates.github.io/accounting.js",
+  "ignore": [
+    "**/.*",
+    "tests"
+  ],
+  "keywords": [
+    "accounting",
+    "number",
+    "money",
+    "currency",
+    "format",
+    "utilities",
+    "finance",
+    "exchange"
+  ],
+  "main": "accounting.js",
+  "name": "accounting",
+  "version": "0.4.2",
+  "_release": "0.4.2",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.4.2",
+    "commit": "15e38ac6d61460958c389cc319a837e7a0d6cfa7"
+  },
+  "_source": "https://github.com/duongtdvn/accounting.js.git",
+  "_target": "^0.4.2",
+  "_originalSource": "accounting-js"
+}

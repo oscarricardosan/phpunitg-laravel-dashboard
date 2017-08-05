@@ -14,3 +14,19 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Auth::routes();
+
+Route::group(['middleware' => ['auth']], function(){
+    Route::get('dashboard', 'HomeController@index')->name('home');
+
+    Route::group(['prefix' => 'app'], function() {
+        Route::post('store', 'General\AppController@store')->name('App.Store');
+        Route::group(['prefix' => '{appEntity}'], function() {
+            Route::get('show', 'General\AppController@show')->name('App.Show');
+        });
+    });
+
+});
+
+Route::get('login', function () {return redirect('/');});

@@ -6,14 +6,23 @@
     "type": "project",
     "require": {
         "php": ">=5.6.4",
+        "doctrine/dbal": "^2.6",
         "laravel/framework": "5.4.*",
-        "laravel/tinker": "~1.0"
+        "laravel/tinker": "~1.0",
+        "oscarricardosan/mapper": "^1.4"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
         "mockery/mockery": "0.9.*",
+        "oscarricardosan/phpunitg_laravel": "@dev",
         "phpunit/phpunit": "~5.7"
     },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "~/Code/phpunitg-laravel/package"
+        }
+    ],
     "autoload": {
         "classmap": [
             "database"
