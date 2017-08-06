@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\General;
 
 
+use App\ApiClients\ExternalAppClient;
 use App\Entities\General\AppEntity;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreAppRequest;
 use App\Interfaces\Repositories\General\AppRepositoryInterface;
 use App\Maps\General\StoreAppMap;
+use Illuminate\Support\Facades\Storage;
 
 class AppController extends Controller
 {
@@ -48,5 +50,11 @@ class AppController extends Controller
         return view('app.show', [
             'appEntity'=> $appEntity
         ]);
+    }
+
+    public function scanTests(AppEntity $appEntity)
+    {
+        $appClient= new ExternalAppClient($appEntity);
+        return ($appClient->getTests());
     }
 }

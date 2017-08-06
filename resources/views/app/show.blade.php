@@ -69,9 +69,9 @@
                             <h3 class="box-title">Tests</h3>
 
                             <div class="box-tools pull-right">
-                                <button type="button" class="btn btn-box-tool">
+                                <button type="button" class="btn btn-box-tool" style="color: #354eb5;">
                                     <i class="fa fa-refresh"></i>
-                                    Scan Folders
+                                    Scan by tests
                                 </button>
                             </div>
                         </div>

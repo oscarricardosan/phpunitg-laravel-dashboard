@@ -29,25 +29,6 @@
                             </p>
                             <input name="url" class="form-control">
                         </div>
-                        <div class="form-group col-sm-12">
-                            <label class="control-label" style="margin: 0">Folders to scan:</label>
-                            <p class="help-block" style="margin: 0">
-                                For a faster scan, specify the path of the folders where your classes are related to tests.
-                            </p>
-                            <ul id="foldersToScan">
-                                <li class="col-sm-12">
-                                    <div class="col-sm-12" style="padding: 0px !important;">
-                                        <div class="directory_line" contenteditable="true">app/</div>
-                                    </div>
-                                </li>
-                            </ul>
-                            <div style="text-align: right; padding-top: 0.5em;" class="col-sm-12">
-                                <a href="#" class="addFolderToScan" style="text-decoration: underline;">
-                                    <i class="fa fa-plus-circle" aria-hidden="true"></i>
-                                    Add folder
-                                </a>
-                            </div>
-                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -85,14 +66,6 @@
             event.preventDefault();
             var form= $(this);
             var data= $(this).serializeArray();
-            var folders_to_scan= [];
-            $('.directory_line').each(function(){
-                data.push({
-                    name: 'folders_to_scan[]',
-                    value: $(this).text()
-                });
-            });
-            console.log(data);
             var request = $.ajax({
                 url: form.attr('action'),
                 type: form.attr('method'),

@@ -5,6 +5,9 @@ namespace Tests\Unit\General;
 
 use Tests\BaseTest;
 
+/**
+ * @phpunitG
+ */
 class DashboardTest extends BaseTest
 {
 
@@ -15,7 +18,7 @@ class DashboardTest extends BaseTest
     {
         $this->actingAs($this->user);
         $response= $this->get(route('home'));
-        $response->assertSee('Dashboard.Index');
+        $response->assertSee('Dashboard.Inde-x');
     }
 
     /**
