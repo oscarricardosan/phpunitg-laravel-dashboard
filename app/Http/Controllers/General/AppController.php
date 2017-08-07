@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreAppRequest;
 use App\Interfaces\Repositories\General\AppRepositoryInterface;
 use App\Maps\General\StoreAppMap;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class AppController extends Controller
@@ -52,9 +53,11 @@ class AppController extends Controller
         ]);
     }
 
-    public function scanTests(AppEntity $appEntity)
+    public function scanTests(AppEntity $appEntity, Request $request)
     {
-        $appClient= new ExternalAppClient($appEntity);
-        return ($appClient->getTests());
+        $appEntity->getRepo()
+            ->cleanAppTables()
+            ->storeTestsOfExternalApp();
+        return redirect(route('App.Show', $appEntity));
     }
 }

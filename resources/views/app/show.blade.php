@@ -7,6 +7,9 @@
     @include('layouts.sidebar.intranet_sidebar')
 @endsection
 @section('estateSidebar', '')
+@php
+    $totalTags= $totalTests= $totalMethods= 0;
+@endphp
 @section('content')
     <div class="content-wrapper">
         <section class="content-header">
@@ -38,40 +41,22 @@
                             </div>
                             <div id="collapseOne" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
                                 <div class="box-body">
-                                    <ol>
-                                        <li>Go to your app</li>
-                                        <li>
-                                            Exec
-                                            <kbd class="code">
-                                                composer require --dev oscarricardosan/phpunitg_laravel
-                                            </kbd>
-                                        </li>
-                                        <li>
-                                            Put in .env
-                                            <kbd class="code">
-                                                PHPUNITG_TOKEN={{$appEntity->token}}
-                                            </kbd>
-                                        </li>
-                                        <li>
-                                            Exec
-                                            <kbd class="code">
-                                                php artisan vendor:publish
-                                            </kbd>
-                                        </li>
-                                    </ol>
+                                    @include('app.partials.steps')
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="box">
+                    <div class="box" style="{{ $appEntity->tags()->count()==0?'display:none;':'' }}">
                         <div class="box-header with-border">
                             <h3 class="box-title">Tests</h3>
 
                             <div class="box-tools pull-right">
                                 <button type="button" class="btn btn-box-tool" style="color: #354eb5;">
+                                    <a href="{{ route('App.ScanTests', $appEntity) }}">
                                     <i class="fa fa-refresh"></i>
                                     Scan by tests
+                                    </a>
                                 </button>
                             </div>
                         </div>
@@ -79,82 +64,103 @@
                         <div class="box-body">
                             <div class="row">
                                 <div class="col-md-4">
-                                    <h4>Folders</h4>
+                                    <h4>Tags</h4>
                                 </div>
                                 <div class="col-md-8">
-                                    <h4>Classes with phpunitg tests</h4>
+                                    <h4>Tests</h4>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-4">
-                                    <div>{{--
-                                        @foreach($appEntity->folders as $key=> $folder)
-                                            <button type="button" class="list-group-item {{ $key==0?'active':'' }}"
-                                                    href="#tab_app_{{$key}}" data-toggle="tab" >
-                                                <span class="badge">14</span>
-                                                {{ $folder->directory }}
+                                    <div>
+                                        <button type="button" class="list-group-item active"
+                                            href="#tab_app_0" data-toggle="tab"
+                                            style="margin-bottom: 0.5em;"
+                                        >
+                                            <span class="badge">Tests: <span class="allTags"></span></span>
+                                            ALL TAGS
+                                        </button>
+                                        @foreach($appEntity->tags->sortBy('name') as $key=> $tag)
+                                            <button type="button" class="list-group-item "
+                                                    href="#tab_app_{{$key +1 }}" data-toggle="tab" >
+                                                <span class="badge">Tests: {{ $tag->tests->count()}}</span>
+                                                {{ $tag->name}}
                                             </button>
-                                        @endforeach--}}
+                                        @endforeach
                                     </div>
                                 </div>
                                 <div class="col-sm-8">
-                                    <div class="tab-content">{{--
-                                        @foreach($appEntity->folders as $key=> $folder)
-                                            <div class="tab-pane {{ $key==0?'active':'' }}" id="tab_app_{{$key}}">
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="tab_app_0">
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                <tr>
+                                                    <th>Class</th>
+                                                    <th>Methods</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                @foreach($appEntity->tags->sortBy('name') as $key=> $tag)
+                                                    @php $totalTags++ @endphp
+                                                    @foreach($tag->tests as $test)
+                                                        @php $totalTests++ @endphp
+                                                        @include('app.partials.test_tr', [
+                                                            'tag'=> $tag,
+                                                            'test'=> $test,
+                                                        ])
+                                                        @foreach($test->methods as $method)
+                                                            @php $totalMethods++ @endphp
+                                                        @endforeach
+                                                    @endforeach
+                                                @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        @foreach($appEntity->tags->sortBy('name') as $key=> $tag)
+                                            <div class="tab-pane" id="tab_app_{{$key +1 }}">
                                                 <table class="table table-bordered">
                                                     <thead>
                                                         <tr>
                                                             <th>Class</th>
-                                                            <th>Tests</th>
+                                                            <th>Methods</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr>
-                                                            <td>{{ $key }}- 1</td>
-                                                            <td>1</td>
-                                                        </tr>
+                                                        @foreach($tag->tests as $test)
+                                                            @include('app.partials.test_tr', [
+                                                               'tag'=> $tag,
+                                                               'test'=> $test,
+                                                            ])
+                                                        @endforeach
                                                     </tbody>
                                                 </table>
                                             </div>
-                                        @endforeach--}}
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="box-footer">
                             <div class="row">
-                                <div class="col-sm-3 col-xs-6">
+                                <div class="col-sm-4 col-xs-6">
                                     <div class="description-block border-right">
-                                        <span class="description-percentage text-green"><i class="fa fa-caret-up"></i> 17%</span>
-                                        <h5 class="description-header">$35,210.43</h5>
-                                        <span class="description-text">TOTAL REVENUE</span>
+                                        <span class="description-percentage text-green"><i class="fa fa-object-group fa-2x"></i></span>
+                                        <h5 class="description-header">{{ $totalTags }}</h5>
+                                        <span class="description-text">TOTAL TAGS</span>
                                     </div>
-                                    <!-- /.description-block -->
                                 </div>
-                                <!-- /.col -->
-                                <div class="col-sm-3 col-xs-6">
+                                <div class="col-sm-4 col-xs-6">
                                     <div class="description-block border-right">
-                                        <span class="description-percentage text-yellow"><i class="fa fa-caret-left"></i> 0%</span>
-                                        <h5 class="description-header">$10,390.90</h5>
-                                        <span class="description-text">TOTAL COST</span>
+                                        <span class="description-percentage text-yellow"><i class="fa fa-object-ungroup fa-2x"></i></span>
+                                        <h5 class="description-header">{{ $totalTests }}</h5>
+                                        <span class="description-text">TOTAL TESTS</span>
                                     </div>
-                                    <!-- /.description-block -->
                                 </div>
-                                <!-- /.col -->
-                                <div class="col-sm-3 col-xs-6">
+                                <div class="col-sm-4 col-xs-6">
                                     <div class="description-block border-right">
-                                        <span class="description-percentage text-green"><i class="fa fa-caret-up"></i> 20%</span>
-                                        <h5 class="description-header">$24,813.53</h5>
-                                        <span class="description-text">TOTAL PROFIT</span>
-                                    </div>
-                                    <!-- /.description-block -->
-                                </div>
-                                <!-- /.col -->
-                                <div class="col-sm-3 col-xs-6">
-                                    <div class="description-block">
-                                        <span class="description-percentage text-red"><i class="fa fa-caret-down"></i> 18%</span>
-                                        <h5 class="description-header">1200</h5>
-                                        <span class="description-text">GOAL COMPLETIONS</span>
+                                        <span class="description-percentage text-green"><i class="fa fa-puzzle-piece fa-2x"></i></span>
+                                        <h5 class="description-header">{{ $totalMethods }}</h5>
+                                        <span class="description-text">TOTAL METHODS</span>
                                     </div>
                                     <!-- /.description-block -->
                                 </div>
@@ -170,13 +176,16 @@
         </section>
     </div>
     <!-- App.Show -->
-
     <script>
         $(document).ready(function(){
             $('.list-group-item ').click(function(){
                 $('.list-group-item ').removeClass('active');
                 $(this).addClass('active');
             });
+            @if($appEntity->tags()->count()==0)
+                $('[data-parent="#accordion"]').click()
+            @endif
+            $('.allTags').html({{$totalTests}});
         });
     </script>
 @endsection

@@ -16,4 +16,14 @@ interface AppRepositoryInterface extends BaseRepositoryInterface
      */
     public function store(StoreAppMap $storeMap);
 
+    /**
+     * @return $this
+     */
+    public function cleanAppTables();
+
+    /**
+     * @return $this
+     */
+    public function storeTestsOfExternalApp();
+
 }

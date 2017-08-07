@@ -19,4 +19,9 @@ class AppEntity extends BaseEntity
         return $repo->setEntity($this);
     }
 
+    public function tags()
+    {
+        return $this->hasMany(TagEntity::class, 'app_id');
+    }
+
 }

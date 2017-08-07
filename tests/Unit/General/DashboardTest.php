@@ -18,7 +18,7 @@ class DashboardTest extends BaseTest
     {
         $this->actingAs($this->user);
         $response= $this->get(route('home'));
-        $response->assertSee('Dashboard.Inde-x');
+        $response->assertSee('Dashboard.Index');
     }
 
     /**

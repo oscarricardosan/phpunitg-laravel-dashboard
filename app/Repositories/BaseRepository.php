@@ -11,6 +11,7 @@ use App\User;
 use Doctrine\DBAL\Query\QueryBuilder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\DB;
 
 abstract class BaseRepository implements BaseRepositoryInterface
 {
@@ -19,6 +20,9 @@ abstract class BaseRepository implements BaseRepositoryInterface
     protected $user = null;
     protected $query = null;
 
+    /**
+     * @return BaseEntity
+     */
     abstract public function getNewEntity();
 
     public function __construct($entity = null)
@@ -271,4 +275,8 @@ abstract class BaseRepository implements BaseRepositoryInterface
         }
 
     }
+
+
+
+
 }

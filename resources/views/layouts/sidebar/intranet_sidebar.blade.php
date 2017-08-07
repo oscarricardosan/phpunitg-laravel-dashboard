@@ -43,11 +43,25 @@
         </form>
 
         <ul class="sidebar-menu">
-            <li>
-                <a href="documentation/index.html">
-                    <i class="fa fa-book"></i> <span>Documentation</span>
-                </a>
-            </li>
+            @if(isset($appEntity))
+                <li>
+                    <a href="documentation/index.html">
+                        <i class="fa fa-globe"></i> <span>All tags</span>
+                    </a>
+                </li>
+                @foreach($appEntity->tags->sortBy('name') as $tag)
+                    <li>
+                        <a href="documentation/index.html">
+                            <i class="fa fa-book"></i>
+                            <span>{{ $tag->name }}</span>
+                            <span class="pull-right-container">
+                                <span class="label label-primary pull-right">{{ $tag->tests->count() }}</span>
+                            </span>
+
+                        </a>
+                    </li>
+                @endforeach
+            @endif
             <li class="header">Setup</li>
         </ul>
     </section>

@@ -4,11 +4,13 @@ namespace Tests\Unit\General;
 
 
 use App\Entities\General\AppEntity;
+use App\Entities\General\TagEntity;
+use App\Entities\General\TestEntity;
 use Illuminate\Support\Facades\Session;
 use Tests\BaseTest;
 
 /**
- * @phpunitG
+ * @phpunitG App
  */
 class AppTest extends BaseTest
 {
@@ -64,38 +66,29 @@ class AppTest extends BaseTest
         $response->assertRedirect(route('App.Show', $appEntity));
 
 
+        $this->assertDatabaseHas('tags', ['app_id'=> $appEntity->id, 'name'=> "No tag",]);
+        $this->assertDatabaseHas('tags', ['app_id'=> $appEntity->id, 'name'=> 'App',]);
+
+        $tag= TagEntity::where("name", "No tag")->get()[0];
         $this->assertDatabaseHas('tests', [
-            'app_id'=> $appEntity->id,
+            'tag_id'=> $tag->id,
             'class'=> 'Tests\\Unit\\General\\DashboardTest',
             'path'=> '/home/vagrant/Code/phpunitg-laravel/dashboard/tests/Unit/General/DashboardTest.php',
         ]);
-        $this->assertDatabaseHas('test_methods', [
-            'name'=> 'is_index_working',
-            'test_id'=> '',
-        ]);
-        $this->assertDatabaseHas('test_methods', [
-            'name'=> 'is_index_denieding_to_guest',
-            'test_id'=> '',
-        ]);
+        $test= TestEntity::where("class", "Tests\\Unit\\General\\DashboardTest")->get()[0];
+        $this->assertDatabaseHas('methods', ['test_id'=> $test->id, 'name'=> 'is_index_working',]);
+        $this->assertDatabaseHas('methods', ['test_id'=> $test->id, 'name'=> 'is_index_denieding_to_guest',]);
 
-
+        $tag= TagEntity::where("name", "App")->get()[0];
         $this->assertDatabaseHas('tests', [
-            'app_id'=> $appEntity->id,
+            'tag_id'=> $tag->id,
             'class'=> 'Tests\\Unit\\General\\AppTest',
             'path'=> '/home/vagrant/Code/phpunitg-laravel/dashboard/tests/Unit/General/AppTest.php',
         ]);
-        $this->assertDatabaseHas('test_methods', [
-            'name'=> 'is_store_working',
-            'test_id'=> '',
-        ]);
-        $this->assertDatabaseHas('test_methods', [
-            'name'=> 'is_show_working',
-            'test_id'=> '',
-        ]);
-        $this->assertDatabaseHas('test_methods', [
-            'name'=> 'is_scan_tests_working',
-            'test_id'=> '',
-        ]);
+        $test= TestEntity::where("class", "Tests\\Unit\\General\\AppTest")->get()[0];
+        $this->assertDatabaseHas('methods', ['test_id'=> $test->id, 'name'=> 'is_store_working',]);
+        $this->assertDatabaseHas('methods', ['test_id'=> $test->id, 'name'=> 'is_show_working',]);
+        $this->assertDatabaseHas('methods', ['test_id'=> $test->id, 'name'=> 'is_scan_tests_working',]);
     }
 
 

@@ -5,6 +5,8 @@ namespace App\ApiClients;
 
 use App\Entities\General\AppEntity;
 use App\Interfaces\ApiClients\ExternalAppClientInterface;
+use App\Maps\General\ExternalAppTestsResponse;
+use Illuminate\Support\Collection;
 
 class ExternalAppClient implements ExternalAppClientInterface
 {
@@ -19,14 +21,14 @@ class ExternalAppClient implements ExternalAppClientInterface
     }
 
     /**
-     * @return array
+     * @return ExternalAppTestsResponse
      */
     public function getTests()
     {
         $response= $this->getRequest( $this->appEntity->url.'/phpunitg/getTests' , [
             'token' => $this->appEntity->token
         ]);
-        return $response['tests'];
+        return new ExternalAppTestsResponse($response);
     }
 
     protected function getRequest($url, $data)
