@@ -7,4 +7,10 @@
     border-radius: 3px;
     -webkit-box-shadow: inset 0 -1px 0 rgba(0,0,0,.25);
     box-shadow: inset 0 -1px 0 rgba(0,0,0,.25);
+    line-height: 1.3em;
+}
+.word-break{
+    word-break: break-all;
+    -webkit-word-break: break-all;
+    -mox-word-break: break-all;
 }

@@ -261,12 +261,8 @@ abstract class BaseRepository implements BaseRepositoryInterface
      */
     public function deleteRecordsOfRelationship($relationship_name)
     {
-        $this->validateUserIsPresent();
         try{
             if(!is_null($this->getEntity()->{$relationship_name})){
-                $this->getEntity()->{$relationship_name}()->update([
-                    'user_who_deleted_id' => $this->user->id
-                ]);
                 $this->getEntity()->{$relationship_name}()->delete();
             }
             return $this;

@@ -4,31 +4,37 @@ namespace App\ApiClients;
 
 
 use App\Entities\General\AppEntity;
+use App\Entities\General\MethodEntity;
 use App\Interfaces\ApiClients\ExternalAppClientInterface;
 use App\Maps\General\ExternalAppTestsResponse;
+use App\Maps\General\ResponseExternalPhpunitResponse;
 use Illuminate\Support\Collection;
 
 class ExternalAppClient implements ExternalAppClientInterface
 {
-    /**
-     * @var AppEntity
-     */
-    private $appEntity;
-
-    public function __construct(AppEntity $appEntity)
-    {
-        $this->appEntity = $appEntity;
-    }
 
     /**
      * @return ExternalAppTestsResponse
      */
-    public function getTests()
+    public function getTests(AppEntity $appEntity)
     {
-        $response= $this->getRequest( $this->appEntity->url.'/phpunitg/getTests' , [
-            'token' => $this->appEntity->token
+        $response= $this->getRequest( $appEntity->url.'/phpunitg/getTests' , [
+            'token' => $appEntity->token
         ]);
         return new ExternalAppTestsResponse($response);
+    }
+
+    /**
+     * @return ResponseExternalPhpunitResponse
+     */
+    public function runMethod(MethodEntity $methodEntity)
+    {
+        $app= $methodEntity->test->tag->app;
+        $response= $this->getRequest( $app->url.'/phpunitg/runMethod' , [
+            'token' => $app->token,
+            'method' => $methodEntity->test->class.'::'.$methodEntity->name,
+        ]);
+        return new ResponseExternalPhpunitResponse($response);
     }
 
     protected function getRequest($url, $data)

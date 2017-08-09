@@ -6,6 +6,7 @@ namespace App\Interfaces\Repositories\General;
 use App\Entities\General\AppEntity;
 use App\Entities\General\TestEntity;
 use App\Interfaces\Repositories\BaseRepositoryInterface;
+use App\Maps\General\ResponseExternalPhpunitResponse;
 
 interface MethodRepositoryInterface extends BaseRepositoryInterface
 {
@@ -20,4 +21,9 @@ interface MethodRepositoryInterface extends BaseRepositoryInterface
      * @return $this
      */
     public function store($name);
+
+    /**
+     * @return ResponseExternalPhpunitResponse
+     */
+    public function runInPhpunit();
 }

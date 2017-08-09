@@ -20,9 +20,24 @@ class TestEntity extends BaseEntity
         return $repo->setEntity($this);
     }
 
+    public function tag()
+    {
+        return $this->belongsTo(TagEntity::class, 'tag_id');
+    }
+
     public function methods()
     {
         return $this->hasMany(MethodEntity::class, 'test_id');
+    }
+
+    /**
+     * ACCESSORS
+     */
+
+    public function getSortNameClassAttribute()
+    {
+        $pieces= explode('\\', $this->class);
+        return end($pieces);
     }
 
 }

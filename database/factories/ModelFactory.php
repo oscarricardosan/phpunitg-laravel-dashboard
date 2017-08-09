@@ -30,3 +30,22 @@ $factory->define(\App\Entities\General\AppEntity::class, function (Faker\Generat
         'token'=> str_random(10),
     ];
 });
+
+$factory->define(\App\Entities\General\TagEntity::class, function (Faker\Generator $faker) {
+    return [
+        'name'=> $faker->name,
+    ];
+});
+
+$factory->define(\App\Entities\General\TestEntity::class, function (Faker\Generator $faker) {
+    return [
+        'class'=> 'class',
+        'path'=> 'path',
+    ];
+});
+
+$factory->define(\App\Entities\General\MethodEntity::class, function (Faker\Generator $faker) {
+    return [
+        'name'=> $faker->name,
+    ];
+});

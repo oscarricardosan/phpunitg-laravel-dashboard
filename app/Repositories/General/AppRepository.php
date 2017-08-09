@@ -79,9 +79,7 @@ class AppRepository extends BaseRepository implements AppRepositoryInterface
      */
     public function cleanAppTables()
     {
-        DB::table('methods')->delete();
-        DB::table('tests')->delete();
-        DB::table('tags')->delete();
+        $this->getEntity()->tags()->delete();
         return $this;
     }
 
@@ -102,8 +100,8 @@ class AppRepository extends BaseRepository implements AppRepositoryInterface
      */
     protected function getTestsOfExternalApp()
     {
-        $appClient= new ExternalAppClient($this->getEntity());
-        $this->responseExternalTests= $appClient->getTests();
+        $appClient= new ExternalAppClient();
+        $this->responseExternalTests= $appClient->getTests($this->getEntity());
         return $this;
     }
 

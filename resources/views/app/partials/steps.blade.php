@@ -1,4 +1,4 @@
-<ol>
+<ol style="line-height: 2em;">
     <li>Go to your app</li>
     <li>
         Exec
@@ -13,27 +13,34 @@
         </kbd>
     </li>
     <li>
-        Exec
+        Add the service provider to your config/app.php file:
         <kbd class="code">
-            php artisan vendor:publish
+            \Oscarricardosan\PhpunitgLaravel\OscarricardosanPhpunitgServiceProvider::class
         </kbd>
     </li>
     <li>
-        In the classes of your app put in de cometdocs "@phpunitG TagName" <br>
+        In the tests you want to scan put in the cometdocs  "@phpunitG TagName" <br>
         <div class="code">
             /**<br>
-            * @phpunitG TagName<br>
+            * @phpunitG Tag name<br>
             */<br>
-            class ExampleTest extends TestCase{.....}
+            class ExampleTest extends TestCase{...My code...}
+        </div>
+    </li>
+    <li>
+        In the methods you want to scan put in the cometdocs "@test" <br>
+        <div class="code">
+            /**<br>
+            * @test<br>
+            */<br>
+            public function is_index_working(){...My code...}
         </div>
     </li>
     <li>
         Back and on this page click in
-        <button type="button" class="btn btn-box-tool" style="color: #354eb5;">
-            <a href="{{ route('App.ScanTests', $appEntity) }}">
-                <i class="fa fa-refresh"></i>
-                Scan by tests
-            </a>
-        </button>
+        <a type="button" class="btn btn-box-tool scanByTests" style="color: #354eb5;" href="{{ route('App.ScanTests', $appEntity) }}">
+            <i class="fa fa-refresh"></i>
+            <span class="text">Scan by tests</span>
+        </a>
     </li>
 </ol>

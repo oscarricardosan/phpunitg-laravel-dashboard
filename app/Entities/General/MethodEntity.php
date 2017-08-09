@@ -20,4 +20,19 @@ class MethodEntity extends BaseEntity
         return $repo->setEntity($this);
     }
 
+    public function test()
+    {
+        return $this->belongsTo(TestEntity::class, 'test_id');
+    }
+
+    public function execution()
+    {
+        return $this->hasOne(Method_executionEntity::class, 'method_id');
+    }
+
+    public function executions()
+    {
+        return $this->hasMany(Method_executionEntity::class, 'method_id');
+    }
+
 }

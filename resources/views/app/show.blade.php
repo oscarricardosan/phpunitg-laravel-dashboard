@@ -52,12 +52,10 @@
                             <h3 class="box-title">Tests</h3>
 
                             <div class="box-tools pull-right">
-                                <button type="button" class="btn btn-box-tool" style="color: #354eb5;">
-                                    <a href="{{ route('App.ScanTests', $appEntity) }}">
+                                <a type="button" class="btn btn-box-tool scanByTests" style="color: #354eb5;" href="{{ route('App.ScanTests', $appEntity) }}">
                                     <i class="fa fa-refresh"></i>
-                                    Scan by tests
-                                    </a>
-                                </button>
+                                    <span class="text">Scan by tests</span>
+                                </a>
                             </div>
                         </div>
                         <!-- /.box-header -->
@@ -178,7 +176,11 @@
     <!-- App.Show -->
     <script>
         $(document).ready(function(){
-            $('.list-group-item ').click(function(){
+            $('.list-group-item a').click(function(event) {
+                event.preventDefault();
+            });
+            $('.list-group-item').click(function(event){
+                event.preventDefault();
                 $('.list-group-item ').removeClass('active');
                 $(this).addClass('active');
             });
@@ -186,6 +188,10 @@
                 $('[data-parent="#accordion"]').click()
             @endif
             $('.allTags').html({{$totalTests}});
+
+            $('.scanByTests').click(function () {
+                $('.scanByTests .text').loading();
+            });
         });
     </script>
 @endsection

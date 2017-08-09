@@ -3,6 +3,7 @@
 namespace App\Repositories\General;
 
 
+use App\ApiClients\ExternalAppClient;
 use App\Entities\General\MethodEntity;
 use App\Entities\General\TestEntity;
 use App\Interfaces\Repositories\General\MethodRepositoryInterface;
@@ -44,5 +45,14 @@ class MethodRepository extends BaseRepository implements MethodRepositoryInterfa
         $this->getEntity()->name= $name;
         $this->getEntity()->save();
         return $this;
+    }
+
+    /**
+     * @return ResponseExternalPhpunitResponse
+     */
+    public function runInPhpunit()
+    {
+        return (new ExternalAppClient())
+            ->runMethod($this->getEntity());
     }
 }

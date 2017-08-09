@@ -28,6 +28,18 @@ Route::group(['middleware' => ['auth']], function(){
         });
     });
 
+    Route::group(['prefix' => 'tag'], function() {
+        Route::group(['prefix' => '{tagEntity}'], function() {
+            Route::get('show', 'General\TagController@show')->name('Tag.Show');
+        });
+    });
+
+    Route::group(['prefix' => 'method'], function() {
+        Route::group(['prefix' => '{methodEntity}'], function() {
+            Route::get('run', 'General\MethodController@run')->name('Method.Run');
+        });
+    });
+
 });
 
 Route::get('login', function () {return redirect('/');});

@@ -23,8 +23,9 @@ class AppTest extends BaseTest
         $response = $this->post(route('App.Store'), [
             'name'=> 'My app',
             'url'=> 'myapp.app',
+            '_token'=> csrf_token()
         ]);
-//dd(Session::get('errors'));
+//dd(csrf_field());
         $this->assertDatabaseHas('apps', [
             'name'=> 'My app',
             'url'=> 'myapp.app',
@@ -91,18 +92,5 @@ class AppTest extends BaseTest
         $this->assertDatabaseHas('methods', ['test_id'=> $test->id, 'name'=> 'is_scan_tests_working',]);
     }
 
-
-    /**Leer error de consola
-
-    chdir(base_path());
-    $salida= exec(
-    "vendor/bin/phpunit --bootstrap=bootstrap/autoload.php --configuration=phpunit.xml ".
-    "--filter='Tests\\\\Unit\\\\General\\\\DashboardTest::is_index_working' ".
-    " >log.txt"
-    );
-    $file= file_get_contents('log.txt');
-    dd($file);
-
-     */
 
 }

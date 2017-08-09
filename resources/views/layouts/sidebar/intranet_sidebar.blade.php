@@ -1,4 +1,8 @@
 @inject('AppRepo', 'App\Interfaces\Repositories\General\AppRepositoryInterface')
+@php
+    if(isset($tagEntity))
+        $appEntity= $tagEntity->app;
+@endphp
 <style>
     .selectSite .select2-selection{
         background: #ecf0f5;
@@ -44,14 +48,9 @@
 
         <ul class="sidebar-menu">
             @if(isset($appEntity))
-                <li>
-                    <a href="documentation/index.html">
-                        <i class="fa fa-globe"></i> <span>All tags</span>
-                    </a>
-                </li>
                 @foreach($appEntity->tags->sortBy('name') as $tag)
                     <li>
-                        <a href="documentation/index.html">
+                        <a href="{{ route('Tag.Show', $tag) }}">
                             <i class="fa fa-book"></i>
                             <span>{{ $tag->name }}</span>
                             <span class="pull-right-container">

@@ -20,6 +20,11 @@ class TagEntity extends BaseEntity
         return $repo->setEntity($this);
     }
 
+    public function app()
+    {
+        return $this->belongsTo(AppEntity::class, 'app_id');
+    }
+
     public function tests()
     {
         return $this->hasMany(TestEntity::class, 'tag_id');
