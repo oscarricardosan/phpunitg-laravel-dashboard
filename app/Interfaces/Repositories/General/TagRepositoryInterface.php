@@ -19,4 +19,19 @@ interface TagRepositoryInterface extends BaseRepositoryInterface
      * @return $this
      */
     public function store($name);
+
+    /**
+     * @return integer
+     */
+    public function countSuccessfulMethods();
+
+    /**
+     * @return integer
+     */
+    public function countFailedMethods();
+
+    /**
+     * @return integer
+     */
+    public function countMethodsWithoutExecution();
 }

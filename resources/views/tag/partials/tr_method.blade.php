@@ -25,12 +25,14 @@
             @endif
         </div>
         <div style="text-align: right">
-            <a class="seePhpunitResponse" style="margin-right: 2em;" href="#" title="Run Test" data-toggle="modal" data-target="#phpunitResponse">
+            <button class="btn btn-link seePhpunitResponse" style="margin-right: 2em;" title="Run Test"
+               data-toggle="modal" data-target="#phpunitResponse" type="button"
+            >
                 <i class="fa fa-external-link" aria-hidden="true"></i>See response in modal</span>
-            </a>
-            <a class="runTest" style="text-decoration: underline" href="#" title="Run Test">
+            </button>
+            <button class="btn btn-link runTest" style="text-decoration: underline" href="#" title="Run Test" type="button">
                 <i class="fa fa-cog"></i> <span class="text">Run test</span>
-            </a>
+            </button>
         </div>
     </td>
 </tr>

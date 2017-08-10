@@ -21,7 +21,7 @@ class ExternalAppClient implements ExternalAppClientInterface
         $response= $this->getRequest( $appEntity->url.'/phpunitg/getTests' , [
             'token' => $appEntity->token
         ]);
-        return new ExternalAppTestsResponse($response);
+        return new ExternalAppTestsResponse($response['arrayResponse']);
     }
 
     /**
@@ -34,7 +34,13 @@ class ExternalAppClient implements ExternalAppClientInterface
             'token' => $app->token,
             'method' => $methodEntity->test->class.'::'.$methodEntity->name,
         ]);
-        return new ResponseExternalPhpunitResponse($response);
+        if(!array_has($response['arrayResponse'], 'success'))
+            return new ResponseExternalPhpunitResponse([
+                'success'=> false,
+                'message'=> $response['rawResponse']
+            ]);
+
+        return new ResponseExternalPhpunitResponse($response['arrayResponse']);
     }
 
     protected function getRequest($url, $data)
@@ -45,7 +51,12 @@ class ExternalAppClient implements ExternalAppClientInterface
         $result= curl_exec($chanel);
         //dd($result);
         curl_close($chanel);
-        return json_decode($result, true);
+        $decodeResponse= json_decode($result, true);
+        $decodeResponse= is_array($decodeResponse)?$decodeResponse:[];
+        return array_merge(
+            ['arrayResponse'=> $decodeResponse],
+            ['rawResponse'=> $result]
+        );
     }
 
 }

@@ -38,7 +38,7 @@
         <!-- search form -->
         <form action="#" method="get" class="sidebar-form">
             <div class="input-group">
-                <input type="text" name="q" class="form-control" placeholder="Search tag...">
+                <input type="text" id="searchTagSidebar" class="form-control" placeholder="Search tag...">
                 <span class="input-group-btn">
                 <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
                 </button>
@@ -46,17 +46,30 @@
             </div>
         </form>
 
-        <ul class="sidebar-menu">
+        <ul class="sidebar-menu tags">
             @if(isset($appEntity))
                 @foreach($appEntity->tags->sortBy('name') as $tag)
-                    <li>
+                    <li class="tag">
                         <a href="{{ route('Tag.Show', $tag) }}">
                             <i class="fa fa-book"></i>
                             <span>{{ $tag->name }}</span>
-                            <span class="pull-right-container">
-                                <span class="label label-primary pull-right">{{ $tag->tests->count() }}</span>
-                            </span>
+                            @if($tag->getRepo()->countFailedMethods()>0)
+                                <span class="label label-danger pull-right" title="Failed">
+                                    {{ $tag->getRepo()->countFailedMethods() }}
+                                </span>
+                            @endif
 
+                            @if($tag->getRepo()->countMethodsWithoutExecution()>0)
+                            <span class="label label-default pull-right" title="Without Test">
+                                {{ $tag->getRepo()->countMethodsWithoutExecution() }}
+                            </span>
+                            @endif
+
+                            @if($tag->getRepo()->countSuccessfulMethods()>0)
+                            <span class="label label-success pull-right" title="Success">
+                                {{ $tag->getRepo()->countSuccessfulMethods() }}
+                            </span>
+                            @endif
                         </a>
                     </li>
                 @endforeach

@@ -55,9 +55,15 @@ class AppController extends Controller
 
     public function scanTests(AppEntity $appEntity, Request $request)
     {
-        $appEntity->getRepo()
-            ->cleanAppTables()
-            ->storeTestsOfExternalApp();
-        return redirect(route('App.Show', $appEntity));
+        try{
+            $appEntity->getRepo()
+                ->cleanAppTables()
+                ->storeTestsOfExternalApp();
+            return redirect(route('App.Show', $appEntity));
+            }catch (\Exception $exception){
+            return response()->json([
+                '0'=> [$exception->getMessage()]
+            ],  422);
+        }
     }
 }

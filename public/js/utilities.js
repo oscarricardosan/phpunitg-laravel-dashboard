@@ -140,9 +140,10 @@ $.fn.loading = function(label) {
     });
 };
 
-$.fn.unloading = function() {
+$.fn.unloading = function(html) {
+    html= html==undefined?'':html;
     this.each(function(index, element) {
-        $(element).html('');
+        $(element).html(html);
     });
 };
 
@@ -166,4 +167,3 @@ $.fn.renderTpl= function(data) {
     });
     return tpl;
 };
-

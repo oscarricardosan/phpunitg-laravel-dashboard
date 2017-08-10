@@ -160,6 +160,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 if ($(this).attr('href') == current_url)
                     $(this).parents('li').addClass('active');
             });
+
+            $('#searchTagSidebar').keyup(function(){
+                var search= $(this).val();
+                $('.sidebar-menu.tags li.tag').css('display', 'none');
+                $('.sidebar-menu.tags li.tag:icontains('+search+')').each(function(){
+                    $(this).css('display', 'block');
+                });
+            });
         </script>
     </body>
 </html>

@@ -12,12 +12,20 @@ class TagEntity extends BaseEntity
     protected $table = 'tags';
 
     /**
+     * @var TagRepositoryInterface
+     */
+    protected $repo;
+
+    /**
      * @return TagRepositoryInterface
      */
     public function getRepo()
     {
-        $repo= App::make(TagRepositoryInterface::class);
-        return $repo->setEntity($this);
+        if(is_null($this->repo)){
+            $this->repo= App::make(TagRepositoryInterface::class);
+            $this->repo->setEntity($this);
+        };
+        return $this->repo;
     }
 
     public function app()

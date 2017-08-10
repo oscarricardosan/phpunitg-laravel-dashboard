@@ -28,8 +28,13 @@ class Method_executionEntity extends BaseEntity
      */
     public function getHtmlMessageAttribute()
     {
+        //dd($this->message);
         $html= htmlentities($this->message);
+        $html= str_replace(" ", "&nbsp;", $html);
+        $html= str_replace("\n", "<br>", $html);
         $html= str_replace("\\n", "<br>", $html);
+        $html= str_replace("\\r", "<br>", $html);
+        $html= str_replace("\r", "<br>", $html);
         return $html;
     }
 }

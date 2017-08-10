@@ -14,3 +14,12 @@
     -webkit-word-break: break-all;
     -mox-word-break: break-all;
 }
+.sidebar-menu>li{
+    border-bottom: 1px solid #1c272b;
+}
+.sidebar-menu>li>a{
+    white-space: normal;
+    word-break: break-all;
+    -webkit-word-break: break-all;
+    -mox-word-break: break-all;
+}

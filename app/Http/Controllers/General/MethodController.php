@@ -24,14 +24,20 @@ class MethodController extends Controller
 
     public function run(MethodEntity $methodEntity)
     {
-        $phpunitResult= $methodEntity->getRepo()
-            ->deleteRecordsOfRelationship('executions')
-            ->runInPhpunit();
+        try{
+            $phpunitResult= $methodEntity->getRepo()
+                ->deleteRecordsOfRelationship('executions')
+                ->runInPhpunit();
 
-        $method_execution= $this->method_executionRepository
-            ->setMethodEntity($methodEntity)
-            ->storeExternalResponse($phpunitResult)
-            ->getEntity();
+            $method_execution= $this->method_executionRepository
+                ->setMethodEntity($methodEntity)
+                ->storeExternalResponse($phpunitResult)
+                ->getEntity();
+        }catch (\Exception $exception){
+            return response()->json([
+            '0'=> [$exception->getMessage()]
+            ],  422);
+        }
 
         return response()->json([
             'success'=> $method_execution->success,
