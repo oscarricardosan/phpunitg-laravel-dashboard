@@ -3,7 +3,7 @@
     <li>
         Exec
         <kbd class="code">
-            composer require --dev oscarricardosan/phpunitg_laravel
+            composer require oscarricardosan/phpunitg_laravel --dev
         </kbd>
     </li>
     <li>

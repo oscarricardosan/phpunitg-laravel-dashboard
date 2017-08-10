@@ -21,7 +21,7 @@
                             <li style="padding-bottom: 1em;">
                                 In your app install our package
                                 <kbd class="code">
-                                    composer require --dev oscarricardosan/phpunitg_laravel
+                                    composer require oscarricardosan/phpunitg_laravel --dev
                                 </kbd>
                             </li>
                             <li style="padding-bottom: 1em;">Set up your app.</li>

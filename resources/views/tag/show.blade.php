@@ -324,14 +324,15 @@
             });
             
             function refreshCountExecutions() {
+                var activeTab= $('.list-group-item.active').attr('href');
                 $('.totalSuccess').html(
-                    $('.tab-pane.active .tableTests .tr_test.success').length
+                    $(activeTab+' .tableTests .tr_test.success').length
                 );
                 $('.totalFailed').html(
-                    $('.tab-pane.active .tableTests .tr_test.danger').length
+                    $(activeTab+' .tableTests .tr_test.danger').length
                 );
                 $('.totalNoExecution').html(
-                    $('.tab-pane.active .tableTests .tr_test.active').length
+                    $(activeTab+' .tableTests .tr_test.active').length
                 );
             }
 
