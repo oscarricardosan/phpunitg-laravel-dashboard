@@ -22,10 +22,12 @@
                                 In your app install our package
                                 <kbd class="code">
                                     composer require oscarricardosan/phpunitg_laravel --dev
-                                </kbd>
+                                </kbd><br>
+                                <a href="https://packagist.org/packages/oscarricardosan/phpunitg_laravel" target="_blank">
+                                    https://packagist.org/packages/oscarricardosan/phpunitg_laravel
+                                </a>
                             </li>
                             <li style="padding-bottom: 1em;">Set up your app.</li>
-                            <li style="padding-bottom: 1em;">Enjoy your dashboard for the tests of your app.</li>
                         </ol>
                     </div>
                 </div>

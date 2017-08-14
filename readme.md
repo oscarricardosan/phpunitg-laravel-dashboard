@@ -32,4 +32,6 @@ $ php artisan migrate
 
 6) Log in, register apps.
 
-7) Enjoy it.
+## Screenshots
+
+

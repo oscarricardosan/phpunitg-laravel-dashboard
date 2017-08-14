@@ -15,9 +15,9 @@
                 <!-- Custom Tabs -->
                 <div class="nav-tabs-custom">
                     <ul class="nav nav-tabs">
-                        <li class="{{\App\User::count()>0?'active':''}}"><a href="#tab_1" data-toggle="tab">Sign in</a></li>
+                        <li class="{{\App\User::count()>0?'active':''}}"><a href="#tab_1" data-toggle="tab">Login</a></li>
                         <li class="{{\App\User::count()==0?'active':''}}">
-                            <a href="#tab_2" data-toggle="tab" style="background: #6bcfe6 !important;">Sign up</a>
+                            <a href="#tab_2" data-toggle="tab" style="background: #6bcfe6 !important;">Register</a>
                         </li>
                     </ul>
                     <div class="tab-content">
