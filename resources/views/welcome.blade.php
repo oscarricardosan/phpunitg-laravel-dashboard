@@ -15,11 +15,13 @@
                 <!-- Custom Tabs -->
                 <div class="nav-tabs-custom">
                     <ul class="nav nav-tabs">
-                        <li class="active"><a href="#tab_1" data-toggle="tab">Sign in</a></li>
-                        <li class=""><a href="#tab_2" data-toggle="tab">Sign up</a></li>
+                        <li class="{{\App\User::count()>0?'active':''}}"><a href="#tab_1" data-toggle="tab">Sign in</a></li>
+                        <li class="{{\App\User::count()==0?'active':''}}">
+                            <a href="#tab_2" data-toggle="tab" style="background: #6bcfe6 !important;">Sign up</a>
+                        </li>
                     </ul>
                     <div class="tab-content">
-                        <div class="tab-pane active" id="tab_1">
+                        <div class="tab-pane {{\App\User::count()>0?'active':''}}" id="tab_1">
                             <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
                                 {{ csrf_field() }}
                                 <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
@@ -65,7 +67,7 @@
                                 </div>
                             </form>
                         </div>
-                        <div class="tab-pane" id="tab_2">
+                        <div class="tab-pane {{\App\User::count()==0?'active':''}}" id="tab_2">
                             <form class="form-horizontal" method="POST" action="{{ route('register') }}">
                                 {{ csrf_field() }}
 

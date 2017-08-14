@@ -9,7 +9,7 @@
     <td>
         <input type="checkbox" class="testSelect" value="{{ $method->id }}">
     </td>
-    <td>
+    <td class="testName">
         <i class="fa fa-question-circle" aria-hidden="true" style="color: gray"></i>
         <i class="fa fa-check-circle" aria-hidden="true" style="color:green;"></i>
         <i class="fa fa-times-circle" aria-hidden="true" style="color: #ec1010"></i>

@@ -148,6 +148,7 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-8">
+                                    <input type="text" id="searchTest" class="form-control" placeholder="Search test...">
                                     <div class="tab-content">
                                         <div class="tab-pane active" id="tab_app_0">
                                             <table class="table table-bordered tableTests">
@@ -335,6 +336,17 @@
                     $(activeTab+' .tableTests .tr_test.active').length
                 );
             }
+
+            $('#searchTest').keyup(function(){
+                var search= $(this).val();
+                var activeTab= $('.list-group-item.active').attr('href');
+                $(activeTab+' .tableTests .tr_test').css('display', 'none');
+                $(activeTab+' .tableTests .tr_test .testName:icontains('+search+')').each(function(){
+                    $(this).closest('tr').css('display', 'table-row');
+                });
+            });
+
+
 
             refreshCountExecutions();
 

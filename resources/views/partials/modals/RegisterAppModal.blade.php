@@ -25,7 +25,7 @@
                         <div class="form-group col-sm-12">
                             <label class="control-label" style="margin: 0">App url:</label>
                             <p class="help-block" style="margin: 0">
-                                This is the local url of your app. Example: http://miapp.app/.
+                                This is the local url of your app. Example: http://miapp.app
                             </p>
                             <input name="url" class="form-control">
                         </div>
