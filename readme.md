@@ -34,16 +34,16 @@ $ php artisan migrate
 
 ## Screenshots
 
-[Dashboard](https://savne.net/phpunitg_images/dashboard.png)
+![Dashboard](https://savne.net/phpunitg_images/dashboard.png)
 
-[New app](https://savne.net/phpunitg_images/new_app.png)
+![New app](https://savne.net/phpunitg_images/new_app.png)
 
-[App](https://savne.net/phpunitg_images/app.png)
+![App](https://savne.net/phpunitg_images/app.png)
 
-[Tests 1](https://savne.net/phpunitg_images/tests_1.png)
+![Tests 1](https://savne.net/phpunitg_images/tests_1.png)
 
-[Tests 2](https://savne.net/phpunitg_images/tests_2.png)
+![Tests 2](https://savne.net/phpunitg_images/tests_2.png)
 
-[Tests 3](https://savne.net/phpunitg_images/tests_3.png)
+![Tests 3](https://savne.net/phpunitg_images/tests_3.png)
 
 
