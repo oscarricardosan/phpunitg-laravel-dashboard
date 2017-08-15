@@ -14,15 +14,9 @@
     "require-dev": {
         "fzaninotto/faker": "~1.4",
         "mockery/mockery": "0.9.*",
-        "oscarricardosan/phpunitg_laravel": "@dev",
+        "oscarricardosan/phpunitg_laravel": "^1.0",
         "phpunit/phpunit": "~5.7"
     },
-    "repositories": [
-        {
-            "type": "path",
-            "url": "~/Code/phpunitg-laravel/package"
-        }
-    ],
     "autoload": {
         "classmap": [
             "database"
