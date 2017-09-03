@@ -251,7 +251,7 @@
                     alert('Select one or more tests');
                     return false;
                 }
-                queue= $('.testSelect:checked');
+                queue= $('.tab-pane.active .testSelect:checked');
                 runTestPendingInQueue();
             });
             $('.seePhpunitResponse').click(function (event) {
