@@ -247,7 +247,7 @@
             });
             $('.runSelectedTests').click(function (event) {
                 event.preventDefault();
-                if($('.testSelect:checked').length == 0){
+                if($('.tab-pane.active .testSelect:checked').length == 0){
                     alert('Select one or more tests');
                     return false;
                 }
