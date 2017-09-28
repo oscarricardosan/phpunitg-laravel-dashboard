@@ -134,11 +134,15 @@
                                             <span class="badge"><span class="allMethods"></span></span>
                                             ALL TESTS
                                         </button>
-                                        @foreach($tagEntity->tests->sortBy('name') as $key=> $test)
+                                        @foreach($tagEntity->tests->sortBy('class') as $key=> $test)
                                             <button type="button" class="list-group-item "
                                                     href="#tab_app_{{$key +1 }}" data-toggle="tab" >
+                                                @php
+                                                    $parts= explode('\\', $test->class);
+                                                    echo "<b>".end($parts)."</b><br>";
+                                                @endphp
                                                 <span class="badge">{{ $test->methods->count()}}</span>
-                                                {{ $test->class}}<br>
+                                                {{ $test->class }}<br>
 
                                                 <small class="bg-gray">
                                                     <b>Path: </b> {{ $test->path }}
