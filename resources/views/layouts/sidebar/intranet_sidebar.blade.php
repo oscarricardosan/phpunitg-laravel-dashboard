@@ -48,6 +48,39 @@
 
         <ul class="sidebar-menu tags">
             @if(isset($appEntity))
+                <li class="tag">
+                    <a href="{{ route('Tag.ShowAll', $appEntity) }}">
+                        <i class="fa fa-globe"></i>
+                        <span>All</span>
+                        @php
+                            $failedMethods= 0;
+                            $methodsWithoutExecution= 0;
+                            $successfulMethods= 0;
+                        @endphp
+                        @foreach($appEntity->tags as $tag)
+                            @php
+                                $failedMethods+= $tag->getRepo()->countFailedMethods();
+                                $methodsWithoutExecution+= $tag->getRepo()->countMethodsWithoutExecution();
+                                $successfulMethods+= $tag->getRepo()->countSuccessfulMethods();
+                            @endphp
+                        @endforeach
+                        @if($failedMethods>0)
+                            <span class="label label-danger pull-right" title="Failed">
+                                {{ $failedMethods }}
+                            </span>
+                        @endif
+                        @if($methodsWithoutExecution>0)
+                            <span class="label label-default pull-right" title="Without Test">
+                                {{ $methodsWithoutExecution }}
+                            </span>
+                        @endif
+                        @if($successfulMethods>0)
+                            <span class="label label-success pull-right" title="Success">
+                                {{ $successfulMethods }}
+                            </span>
+                        @endif
+                    </a>
+                </li>
                 @foreach($appEntity->tags->sortBy('name') as $tag)
                     <li class="tag">
                         <a href="{{ route('Tag.Show', $tag) }}">

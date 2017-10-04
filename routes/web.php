@@ -29,6 +29,9 @@ Route::group(['middleware' => ['auth']], function(){
     });
 
     Route::group(['prefix' => 'tag'], function() {
+        Route::group(['prefix' => '{appEntity}'], function() {
+            Route::get('showAll', 'General\TagController@showAll')->name('Tag.ShowAll');
+        });
         Route::group(['prefix' => '{tagEntity}'], function() {
             Route::get('show', 'General\TagController@show')->name('Tag.Show');
         });
