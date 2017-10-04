@@ -131,6 +131,8 @@
                                             <span class="badge"><span class="allMethods"></span></span>
                                             ALL TESTS
                                         </button>
+
+                                        <input type="text" id="searchTestFile" class="form-control" placeholder="Search test file...">
                                         @foreach($appEntity->tags->sortBy('name') as $key_tag=> $tagEntity)
                                             <button type="button" class="list-group-item disabled" disabled readonly>
                                                 {{ $tagEntity->name }}
@@ -139,7 +141,7 @@
                                                 </span>
                                             </button>
                                             @foreach($tagEntity->tests->sortBy('class') as $key=> $test)
-                                                <button type="button" class="list-group-item "
+                                                <button type="button" class="list-group-item test_file"
                                                         href="#tab_app_{{ $key_tag }}_{{$key +1 }}" data-toggle="tab" >
                                                     @php
                                                         $parts= explode('\\', $test->class);
@@ -356,6 +358,14 @@
                 $(activeTab+' .tableTests .tr_test').css('display', 'none');
                 $(activeTab+' .tableTests .tr_test .testName:icontains('+search+')').each(function(){
                     $(this).closest('tr').css('display', 'table-row');
+                });
+            });
+
+            $('#searchTestFile').keyup(function(){
+                var search= $(this).val();
+                $('.list-group-item.test_file').css('display', 'none');
+                $('.list-group-item.test_file:icontains('+search+')').each(function(){
+                    $(this).css('display', 'block');
                 });
             });
 
