@@ -4,14 +4,6 @@
         <li class="header">Aplicaciones</li>
         <li style="padding: 1em">
             <div class="list-group">
-                <a href="#" class="list-group-item disabled">
-                    Facturación Colombia
-                </a>
-                @if(!is_null(env('DOMAIN_ADUANAS_CO')))
-                    <a href="{{ route('redirect_to_app', 'ADUANAS_CO') }}" class="list-group-item redirect_app" target="_blank">
-                        Aduanas Colombia
-                    </a>
-                @endif
             </div>
         </li>
         <form action="" method="post" target="_blank" id="formRedirectApp" style="display: none">
