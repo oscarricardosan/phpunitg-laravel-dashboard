@@ -247,9 +247,9 @@
 
             $('.selectAll').click(function(){
                 if($(this).is(':checked'))
-                    $(this).closest('table').find('.testSelect').prop('checked', true);
+                    $(this).closest('table').find('.testSelect:visible').prop('checked', true);
                 else
-                    $(this).closest('table').find('.testSelect').prop('checked', false);
+                    $(this).closest('table').find('.testSelect:visible').prop('checked', false);
             });
             $('.runSelectedTests').click(function (event) {
                 event.preventDefault();
