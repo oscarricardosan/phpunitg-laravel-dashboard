@@ -49,9 +49,9 @@ class ExternalAppClient implements ExternalAppClientInterface
         curl_setopt($chanel, CURLOPT_URL, $url.'?'.http_build_query($data));
         curl_setopt($chanel, CURLOPT_RETURNTRANSFER, true);
         $result= curl_exec($chanel);
-        //dd($result);
         curl_close($chanel);
         $decodeResponse= json_decode($result, true);
+        if($decodeResponse===null){dd($result);}
         $decodeResponse= is_array($decodeResponse)?$decodeResponse:[];
         return array_merge(
             ['arrayResponse'=> $decodeResponse],
